@@ -1,7 +1,13 @@
 <template>
   <div class="app">
     <div class="container" ref="fContainerRef">
-      <fs-waterfall :bottom="20" :column="column" :gap="10" :page-size="20" :request="getData">
+      <fs-waterfall
+        :bottom="20"
+        :column="column"
+        :gap="10"
+        :page-size="20"
+        :request="getData"
+      >
         <template #item="{ index }">
           <div
             class="card-box"
@@ -49,6 +55,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+  console.log("您的自动化部署已经完成！！！");
   fContainerRef.value && fContainerObserver.unobserve(fContainerRef.value);
 });
 
@@ -72,7 +79,9 @@ console.log(list.length);
 const getData = (page: number, pageSize: number) => {
   return new Promise<ICardItem[]>((resolve) => {
     setTimeout(() => {
-      resolve(list.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize));
+      resolve(
+        list.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize)
+      );
     }, 1000);
   });
 };
